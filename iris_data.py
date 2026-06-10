@@ -7,6 +7,7 @@ def parse_line(line):
         fields[i] = float(fields[i])
     return fields
 
+
 def add_to_dict(parsed_line, data_dict):
     if len(parsed_line) != len(data_dict):
         raise ValueError("number of fields does not match dictionary keys.")
@@ -15,6 +16,7 @@ def add_to_dict(parsed_line, data_dict):
 
     for i in range(len(parsed_line)):
         data_dict[keys[i]].append(parsed_line[i])
+
 
 def load_data(filename):
     data_dict = {
@@ -35,12 +37,6 @@ def load_data(filename):
     return pd.DataFrame(data_dict)
 
 
-
 def species_mean(data, species, measurement):
     filtered_data = data[data["species"] == species]
     return filtered_data[measurement].mean()
-
-df = load_data("iris.txt")
-print(type(species_mean(df, "Iris-setosa", "sepal_length")))
-print(species_mean(df, "Iris-versicolor", "petal_length"))
-print(species_mean(df, "Iris-virginica", "petal_width"))
